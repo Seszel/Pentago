@@ -4,38 +4,33 @@
 #include <iostream>
 
 #include "player.hpp"
+#include "board.hpp"
 
 
 class Game
 {
 private:
-    Player* player1 = nullptr;
-    Player* player2 = nullptr;
+    std::vector<Player> playersMatrix;
     
 public:
     Game(){
-        player1 = new Player();
-        player2 = new Player();
+        for (int i=0; i<2; i++){
+            playersMatrix.push_back(Player());
+        }
         std::cout << "Welcome in game Pentago!" << std::endl;
     };
     ~Game(){
-        delete player1;
-        delete player2;
     };
 
     void setPlayer1(std::string playerName){
-        player1->setPlayerName(playerName);
+        playersMatrix[0].setPlayerName(playerName);
     }
     void setPlayer2(std::string playerName){
-        player2->setPlayerName(playerName);
+        playersMatrix[1].setPlayerName(playerName);
     }
 
-    Player getPlayer1(){
-        return *player1;
-    }
-
-    Player getPlayer2(){
-        return *player2;
+    std::vector<Player> getPlayersMatrix(){
+        return playersMatrix;
     }
 
     void startGame();
