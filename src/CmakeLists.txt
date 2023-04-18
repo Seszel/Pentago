@@ -1,0 +1,5 @@
+set(BINARY ${CMAKE_PROJECT_NAME})
+
+file(GLOB_RECURSE COMMON_SOURCES main/*.cpp)
+
+add_executable(${BINARY}_run ${COMMON_SOURCES} main.cpp)
