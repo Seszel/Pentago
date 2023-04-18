@@ -8,15 +8,16 @@ class Player
 private:
     std::string playerName;
 public:
-    Player(){};
-    ~Player(){};
+    Player(){
+    }
+    ~Player(){}
 
-    void setPlayerName(std::string playerName){
-        playerName = playerName;
+    void setPlayerName(const std::string playerName){
+        this->playerName = playerName;
     }
 
     std::string getPlayerName(){
-        return playerName;
+        return this->playerName;
     }
 };
 

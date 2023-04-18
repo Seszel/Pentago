@@ -5,9 +5,8 @@
 int main(int argc, char * argv[]){
     
     Game game;
-    game.setPlayer1();
-    game.setPlayer2();
-    std::cout << game.getPlayer1().getPlayerName();
-    // game.startGame();
+    game.setPlayer1("Tygrysek");
+    game.setPlayer2("Pantera");
+    game.startGame();
     return 0;
 }
