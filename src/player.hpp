@@ -22,8 +22,7 @@ private:
     std::string playerName;
 
 public:
-    Player(){
-    }
+    Player(){}
     ~Player(){}
 
     void setPlayerName(const std::string playerName){
