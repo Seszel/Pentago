@@ -9,6 +9,8 @@ void Board::printBoard()
             for (int j=0; j<Board::boardMatrix[i].size(); j++){
                 if (j == 0){
                     std::cout << " -";
+                } else if (j == 3) {
+                    std::cout << " --";
                 } else {
                     std::cout << "---";
                 }
@@ -32,6 +34,8 @@ void Board::printBoard()
             for (int j=0; j<Board::boardMatrix[i].size(); j++){
                 if (j == 0){
                     std::cout << " -";
+                } else if (j == 3) {
+                    std::cout << " --";
                 } else {
                     std::cout << "---";
                 }
