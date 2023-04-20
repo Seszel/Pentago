@@ -2,8 +2,11 @@
 #define GAME_HPP
 
 #include <iostream>
+#include <map>
 
 #include "player.hpp"
+#include "randomPlayer.hpp"
+#include "realPlayer.hpp"
 #include "board.hpp"
 
 
@@ -11,14 +14,10 @@ class Game
 {
 private:
     std::vector<Player> playersMatrix;
+    Board gameBoard;
     
 public:
-    Game(){
-        for (int i=0; i<2; i++){
-            playersMatrix.push_back(Player());
-        }
-        std::cout << "Welcome in game Pentago!" << std::endl;
-    };
+    Game(std::vector<std::string> playerType);
     ~Game(){
     };
 
