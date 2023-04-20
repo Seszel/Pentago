@@ -45,3 +45,20 @@ void Board::printBoard()
     
     std::cout << std::endl << std::endl;
 }
+
+void Board::setAvailableMoves()
+{
+    for (int i=0; i<Board::boardMatrix.size(); i++){
+        for (int j=0; j<Board::boardMatrix[i].size(); j++){
+            if (Board::boardMatrix[i][j] == 0){
+                availableMoves.push_back({i,j});
+            }
+        }
+    }
+}
+
+void Board::changeAvailableMoves(std::pair<int, int> placeOnBoard)
+{
+    auto itr = std::find(Board::availableMoves.begin(), Board::availableMoves.end(), placeOnBoard);
+    // availableMoves.erase((std::distance(Board::availableMoves.cbegin(), itr)));
+}

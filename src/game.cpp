@@ -6,7 +6,7 @@ Game::Game(std::vector<std::string> playerType){
 
     std::map<std::string, int> playersTypeMap{
         {"randomPlayer", 0},
-        {"realPlayer", 1}
+        {"randomPlayer", 1}
     };
 
     for (int i=0; i<2; i++){
@@ -15,7 +15,7 @@ Game::Game(std::vector<std::string> playerType){
                 playersMatrix.push_back(RandomPlayer());
                 break;
             case 1: 
-                playersMatrix.push_back(RealPlayer());
+                playersMatrix.push_back(RandomPlayer());
                 break;
         }
     }
@@ -34,11 +34,43 @@ void Game::startGame(){
 
     int counter = 0;
     int playerIdx = 0;
-    while (counter < 2){
+    Move move;
+    while (counter < 5){
         playerIdx = counter%2;
-        std::cout << "Round number: " << counter << std::endl;
-        Game::gameBoard.printBoard();
+        if (counter%2==0) {
+            std::cout << "Round number: " << counter / 2 << std::endl << std::endl;
+        }
+        std::cout << Game::playersMatrix[playerIdx].getPlayerName() << "'s move" << std::endl;
 
+        std::cout << typeid(Game::playersMatrix[playerIdx]).name() << std::endl;
+
+        Game::playersMatrix[playerIdx].setMove(Game::gameBoard.getAvailableMoves(), playerIdx);
+
+        move = Game::playersMatrix[playerIdx].getMove();
+
+        Game::makeAMove(move);
+
+        Game::gameBoard.changeAvailableMoves(move.placeOnBoard);
+
+        Game::gameBoard.printBoard();
         counter++;
+
     }
+}
+
+// std::vector<std::pair<int, int>> Game::getAvailableMoves(){
+//     std::vector<std::pair<int, int>> availableMoves;
+//     for (int i=0; i<Game::gameBoard.getBoardMatrix().size(); i++){
+//         for (int j=0; j<Game::gameBoard.getBoardMatrix()[i].size(); j++){
+//             if (Game::gameBoard.getBoardMatrix()[i][j] == 0){
+//                 availableMoves.push_back({i,j});
+//             }
+//         }
+//     }
+//     return availableMoves;
+// }
+
+void Game::makeAMove(Move move){
+    std::cout << "RUCH" << std::endl;
+
 }

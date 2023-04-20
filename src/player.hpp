@@ -7,19 +7,26 @@
 struct Move {
     std::pair<int, int> placeOnBoard;
     int numberOfSquare;
-    std::string direction;
+    int direction;
+    int color;
 };
 
-enum Direction {
-    left,
-    right
-};
+// enum Color {
+//     black,
+//     white
+// } color;
+
+// enum Direction {
+//     left,
+//     right
+// } direction;
 
 class Player
 {
 private:
-    Move move;
     std::string playerName;
+protected:
+    Move move;
 
 public:
     Player(){}
@@ -33,8 +40,12 @@ public:
         return this->playerName;
     }
 
-    virtual void setMove(){
+    virtual void setMove(std::vector<std::pair<int, int>> & availableMoves, int playerIdx){
         std::cout << "Set move" << std::endl;
+    }
+
+    Move getMove(){
+        return move;
     }
 
 };

@@ -8,6 +8,7 @@ class Board
 {
 private:
     std::vector<std::vector<int>> boardMatrix;
+    std::vector<std::pair<int, int>> availableMoves; 
 public:
     Board(){
         for (int i=0; i<6; i++){
@@ -21,6 +22,14 @@ public:
     }  
 
     void printBoard();
+
+    void setAvailableMoves();
+
+    void changeAvailableMoves(std::pair<int,int> placeOnBoard);
+
+    std::vector<std::pair<int, int>> & getAvailableMoves(){
+        return availableMoves;
+    }
 
 };
 
