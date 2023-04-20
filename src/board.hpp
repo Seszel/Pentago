@@ -2,6 +2,7 @@
 #define BOARD_HPP
 
 #include <vector>
+#include <iostream>
 
 class Board
 {
@@ -19,9 +20,9 @@ public:
         return boardMatrix;
     }  
 
+    void printBoard();
 
 };
-
 
 
 #endif

@@ -19,7 +19,7 @@ Game::Game(std::vector<std::string> playerType){
                 break;
         }
     }
-    std::cout << "Welcome in game Pentago!" << std::endl;
+    std::cout << std::endl << "Welcome in game Pentago!" << std::endl;
     };
 
 void Game::startGame(){
@@ -30,13 +30,14 @@ void Game::startGame(){
     std::cout 
         << "The game now begins! Have fun " 
         << Game::playersMatrix[0].getPlayerName() << " and " << playersMatrix[1].getPlayerName() << "!"
-        << std::endl;
+        << std::endl << std::endl;
 
     int counter = 0;
     int playerIdx = 0;
-    while (counter < 36){
+    while (counter < 2){
         playerIdx = counter%2;
-        // std::cout << playersMatrix[playerIdx].getPlayerName() << std::endl;
+        std::cout << "Round number: " << counter << std::endl;
+        Game::gameBoard.printBoard();
 
         counter++;
     }
