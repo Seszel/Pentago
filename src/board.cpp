@@ -51,14 +51,14 @@ void Board::setAvailableMoves()
     availableMoves.clear();
     for (int i=0; i<Board::boardMatrix.size(); i++){
         for (int j=0; j<Board::boardMatrix[i].size(); j++){
-            if (Board::boardMatrix[i][j] == 0){
+            if (Board::boardMatrix[i][j] == 'O'){
                 availableMoves.push_back({i,j});
             }
         }
     }
 }
 
-void rotate(std::vector<std::vector<int>> & myMatrix, Move move) 
+void rotate(std::vector<std::vector<char>> & myMatrix, Move move) 
 {
     int row, column;
     switch (move.numberOfSquare) {
@@ -123,11 +123,11 @@ void rotate(std::vector<std::vector<int>> & myMatrix, Move move)
 
 void Board::changeBoard(Move move)
 {
-    int color;
+    char color;
     if (move.color == 0){
-        color = -1;
+        color = 'B';
     } else {
-        color = 1;
+        color = 'W';
     }
     boardMatrix[move.placeOnBoard.first][move.placeOnBoard.second] = color;
 

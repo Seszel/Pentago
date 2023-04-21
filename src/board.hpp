@@ -9,17 +9,17 @@
 class Board
 {
 private:
-    std::vector<std::vector<int>> boardMatrix;
+    std::vector<std::vector<char>> boardMatrix;
     std::vector<std::pair<int, int>> availableMoves; 
 public:
     Board(){
         for (int i=0; i<6; i++){
-            boardMatrix.push_back(std::vector<int>(6,0));
+            boardMatrix.push_back(std::vector<char>(6,'O'));
         }
     };
     ~Board(){};
 
-    std::vector<std::vector<int>> & getBoardMatrix(){
+    std::vector<std::vector<char>> & getBoardMatrix(){
         return boardMatrix;
     }  
 
