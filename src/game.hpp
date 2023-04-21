@@ -16,6 +16,8 @@ class Game
 private:
     std::vector<std::unique_ptr<Player>> playersMatrix;
     Board gameBoard;
+    bool win;
+    std::vector<int> winner;
     
 public:
     Game(std::vector<std::string> playerType);
@@ -36,6 +38,8 @@ public:
     void startGame();
 
     void makeAMove(Move move);
+
+    void checkWin(int playerIdx);
 };
 
 
