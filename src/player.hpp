@@ -25,6 +25,7 @@ class Player
 {
 private:
     std::string playerName;
+    std::string colorName;
 protected:
     Move move;
 
@@ -38,6 +39,14 @@ public:
 
     std::string getPlayerName(){
         return this->playerName;
+    }
+
+    std::string getColorName(){
+        return colorName;
+    }
+
+    void setColorName(std::string colorName){
+        this->colorName = colorName;
     }
 
     virtual void setMove(std::vector<std::pair<int, int>> & availableMoves, int playerIdx){

@@ -39,12 +39,12 @@ void Game::startGame(){
     int counter = 0;
     int playerIdx = 0;
     Move move;
-    while (!win || Game::gameBoard.getAvailableMoves().size() == 0){
+    while (!win && counter < 36){
         playerIdx = counter%2;
         if (counter%2==0) {
             std::cout << "Round number: " << counter / 2 << std::endl << std::endl;
         }
-        std::cout << Game::playersMatrix[playerIdx]->getPlayerName() << "'s move" << std::endl;
+        std::cout << Game::playersMatrix[playerIdx]->getPlayerName() << "'s move, " << Game::playersMatrix[playerIdx]->getColorName() << std::endl;
 
         Game::playersMatrix[playerIdx]->setMove(Game::gameBoard.getAvailableMoves(), playerIdx);
 
@@ -64,8 +64,10 @@ void Game::startGame(){
 
     if (win){
         for (int winnerIdx : winner){
-            std::cout << "The winner is " << Game::playersMatrix[winnerIdx]->getPlayerName() << std::endl;
+            std::cout << "The winner is " << Game::playersMatrix[winnerIdx]->getPlayerName() << " with color " << Game::playersMatrix[winnerIdx]->getColorName() << std::endl;
         }
+    } else {
+        std::cout << "Nobody won. Try again!" << std::endl;
     }
 }
 

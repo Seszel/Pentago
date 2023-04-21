@@ -18,7 +18,6 @@ void Board::printBoard()
             std::cout << std::endl;
         }
         
-        
 
         for (int j=0; j<Board::boardMatrix[i].size(); j++){
             if (j == 3 || j == 0){
