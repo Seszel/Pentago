@@ -3,6 +3,7 @@
 void RandomPlayer::setMove(std::vector<std::pair<int, int>> & availableMoves, int playerIdx){
 
     int randomPlace = rand() % availableMoves.size();
+    int size = availableMoves.size();
     RandomPlayer::move.placeOnBoard = availableMoves[randomPlace];
 
     int randomDirection = rand() % 2;

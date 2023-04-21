@@ -48,6 +48,7 @@ void Board::printBoard()
 
 void Board::setAvailableMoves()
 {
+    availableMoves.clear();
     for (int i=0; i<Board::boardMatrix.size(); i++){
         for (int j=0; j<Board::boardMatrix[i].size(); j++){
             if (Board::boardMatrix[i][j] == 0){
@@ -57,8 +58,79 @@ void Board::setAvailableMoves()
     }
 }
 
-void Board::changeAvailableMoves(std::pair<int, int> placeOnBoard)
+void rotate(std::vector<std::vector<int>> & myMatrix, Move move) 
 {
-    auto itr = std::find(Board::availableMoves.begin(), Board::availableMoves.end(), placeOnBoard);
-    // availableMoves.erase((std::distance(Board::availableMoves.cbegin(), itr)));
+    int row, column;
+    switch (move.numberOfSquare) {
+        case 0:
+            row = 0;
+            column = 0;
+            break;
+        case 1:
+            row = 0;
+            column = 3;
+            break;
+        case 2:
+            row = 3;
+            column = 0;
+            break;
+        case 3:
+            row = 3;
+            column = 3;
+            break;
+    }
+    size_t sizeOfSquare = 3;
+    std::vector<std::vector<int>> square;
+
+
+    for (int r=row; r < row + sizeOfSquare; r++){
+        std::vector<int> temp;
+        for (int c=column; c < column + sizeOfSquare; c++){
+            temp.push_back(myMatrix[r][c]);
+        }
+        square.push_back(temp);
+        temp.clear();
+    }
+
+    if (move.direction == 0){
+
+        reverse(square.begin(), square.end());
+
+        for (int i = 0; i < sizeOfSquare; ++i){
+            for (int j = i+1; j < sizeOfSquare; ++j){
+                std::swap(square[i][j], square[j][i]);
+            }
+	    }
+
+    } else {
+         for (int i = 0; i < sizeOfSquare; ++i){
+                std::swap(square[i][2], square[i][0]);
+            }
+        for (int i = 0; i < sizeOfSquare; ++i){
+            for (int j = i+1; j < sizeOfSquare; ++j){
+                std::swap(square[i][j], square[j][i]);
+            }
+	    }   
+    }
+
+    for (int i=0; i < sizeOfSquare; i++){
+        for (int j=0; j < sizeOfSquare; j++){
+            myMatrix[i+row][j+column] = square[i][j];
+        }
+    }
+}
+
+
+void Board::changeBoard(Move move)
+{
+    int color;
+    if (move.color == 0){
+        color = -1;
+    } else {
+        color = 1;
+    }
+    boardMatrix[move.placeOnBoard.first][move.placeOnBoard.second] = color;
+
+    rotate(boardMatrix, move);
+
 }

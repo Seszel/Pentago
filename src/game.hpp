@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include <map>
+#include <memory>
 
 #include "player.hpp"
 #include "randomPlayer.hpp"
@@ -13,7 +14,7 @@
 class Game
 {
 private:
-    std::vector<Player> playersMatrix;
+    std::vector<std::unique_ptr<Player>> playersMatrix;
     Board gameBoard;
     
 public:
@@ -22,13 +23,13 @@ public:
     };
 
     void setPlayer1(std::string playerName){
-        playersMatrix[0].setPlayerName(playerName);
+        playersMatrix[0]->setPlayerName(playerName);
     }
     void setPlayer2(std::string playerName){
-        playersMatrix[1].setPlayerName(playerName);
+        playersMatrix[1]->setPlayerName(playerName);
     }
 
-    std::vector<Player> getPlayersMatrix(){
+    std::vector<std::unique_ptr<Player>> & getPlayersMatrix(){
         return playersMatrix;
     }
 

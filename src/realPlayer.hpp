@@ -10,6 +10,9 @@ private:
 public:
     RealPlayer(){};
     ~RealPlayer(){};
+
+    void setMove(std::vector<std::pair<int, int>> & availableMoves, int playerIdx);
+
 };
 
 

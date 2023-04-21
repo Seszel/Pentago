@@ -4,6 +4,8 @@
 #include <vector>
 #include <iostream>
 
+#include "player.hpp"
+
 class Board
 {
 private:
@@ -25,11 +27,11 @@ public:
 
     void setAvailableMoves();
 
-    void changeAvailableMoves(std::pair<int,int> placeOnBoard);
-
     std::vector<std::pair<int, int>> & getAvailableMoves(){
         return availableMoves;
     }
+
+    void changeBoard(Move move);
 
 };
 
