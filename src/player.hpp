@@ -11,16 +11,6 @@ struct Move {
     int color;
 };
 
-// enum Color {
-//     black,
-//     white
-// } color;
-
-// enum Direction {
-//     left,
-//     right
-// } direction;
-
 class Player
 {
 private:
@@ -54,6 +44,8 @@ public:
     }
 
     Move getMove(){
+
+        // auto white = Color::white;
         return move;
     }
 

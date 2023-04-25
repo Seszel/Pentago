@@ -54,9 +54,9 @@ void Game::startGame(){
 
         gameBoard.setAvailableMoves();
 
-        Game::gameBoard.printBoard();
+        gameBoard.printBoard();
 
-        Game::checkWin(playerIdx);
+        checkWin(playerIdx);
 
         counter++;
 
@@ -105,7 +105,7 @@ void Game::checkWin(int playerIdx)
 
             blackCount = 0;
             for (int j=0; j<gameBoardMatrix[i].size(); j++){
-                if (gameBoard.getBoardMatrix()[i][j] == 'B'){
+                if (gameBoard.getBoardMatrix()[j][i] == 'B'){
                     blackCount++;
                 }
             }
@@ -144,7 +144,7 @@ void Game::checkWin(int playerIdx)
 
             whiteCount = 0;
             for (int j=0; j<gameBoardMatrix[i].size(); j++){
-                if (gameBoardMatrix[i][j] == 'W'){
+                if (gameBoardMatrix[j][i] == 'W'){
                     whiteCount++;
                 }
             }
