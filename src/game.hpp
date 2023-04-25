@@ -26,11 +26,11 @@ public:
 
     void setPlayer1(std::string playerName){
         playersMatrix[0]->setPlayerName(playerName);
-        playersMatrix[0]->setColorName("black");
+        playersMatrix[0]->setColorName(Color::black);
     }
     void setPlayer2(std::string playerName){
         playersMatrix[1]->setPlayerName(playerName);
-        playersMatrix[1]->setColorName("white");
+        playersMatrix[1]->setColorName(Color::white);
     }
 
     std::vector<std::unique_ptr<Player>> & getPlayersMatrix(){

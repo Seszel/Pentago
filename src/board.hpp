@@ -5,6 +5,7 @@
 #include <iostream>
 
 #include "player.hpp"
+#include "constants.hpp"
 
 class Board
 {

@@ -3,10 +3,10 @@
 void Board::printBoard()
 {
 
-    for (int i=0; i<Board::boardMatrix.size(); i++){
+    for (int i=0; i<boardMatrix.size(); i++){
 
         if (i == 0 || i == 3){
-            for (int j=0; j<Board::boardMatrix[i].size(); j++){
+            for (int j=0; j<boardMatrix[i].size(); j++){
                 if (j == 0){
                     std::cout << " -";
                 } else if (j == 3) {
@@ -19,18 +19,18 @@ void Board::printBoard()
         }
         
 
-        for (int j=0; j<Board::boardMatrix[i].size(); j++){
+        for (int j=0; j<boardMatrix[i].size(); j++){
             if (j == 3 || j == 0){
-                std::cout << "|" << " " << Board::boardMatrix[i][j] << " ";
+                std::cout << "|" << " " << boardMatrix[i][j] << " ";
             } else {
-                std::cout << Board::boardMatrix[i][j] << " ";
+                std::cout << boardMatrix[i][j] << " ";
             }
              
         }
         std::cout << "|" << std::endl;
 
-        if (i == Board::boardMatrix.size() - 1){
-            for (int j=0; j<Board::boardMatrix[i].size(); j++){
+        if (i == boardMatrix.size() - 1){
+            for (int j=0; j<boardMatrix[i].size(); j++){
                 if (j == 0){
                     std::cout << " -";
                 } else if (j == 3) {
@@ -48,9 +48,9 @@ void Board::printBoard()
 void Board::setAvailableMoves()
 {
     availableMoves.clear();
-    for (int i=0; i<Board::boardMatrix.size(); i++){
-        for (int j=0; j<Board::boardMatrix[i].size(); j++){
-            if (Board::boardMatrix[i][j] == 'O'){
+    for (int i=0; i<boardMatrix.size(); i++){
+        for (int j=0; j<boardMatrix[i].size(); j++){
+            if (boardMatrix[i][j] == 'O'){
                 availableMoves.push_back({i,j});
             }
         }
@@ -91,7 +91,7 @@ void rotate(std::vector<std::vector<char>> & myMatrix, Move move)
         temp.clear();
     }
 
-    if (move.direction == 0){
+    if (move.direction == Direction::left){
 
         reverse(square.begin(), square.end());
 
@@ -122,14 +122,7 @@ void rotate(std::vector<std::vector<char>> & myMatrix, Move move)
 
 void Board::changeBoard(Move move)
 {
-    char color;
-    if (move.color == 0){
-        color = 'B';
-    } else {
-        color = 'W';
-    }
-    boardMatrix[move.placeOnBoard.first][move.placeOnBoard.second] = color;
-
+    boardMatrix[move.placeOnBoard.first][move.placeOnBoard.second] = move.color;
     rotate(boardMatrix, move);
 
 }

@@ -33,7 +33,7 @@ void Game::startGame(){
 
     std::cout 
         << "The game now begins! Have fun " 
-        << Game::playersMatrix[0]->getPlayerName() << " and " << playersMatrix[1]->getPlayerName() << "!"
+        << playersMatrix[0]->getPlayerName() << " and " << playersMatrix[1]->getPlayerName() << "!"
         << std::endl << std::endl;
 
     int counter = 0;
@@ -44,13 +44,13 @@ void Game::startGame(){
         if (counter%2==0) {
             std::cout << "Round number: " << counter / 2 << std::endl << std::endl;
         }
-        std::cout << Game::playersMatrix[playerIdx]->getPlayerName() << "'s move, " << Game::playersMatrix[playerIdx]->getColorName() << std::endl;
+        std::cout << playersMatrix[playerIdx]->getPlayerName() << "'s move, " << playersMatrix[playerIdx]->getColorName() << std::endl;
 
-        Game::playersMatrix[playerIdx]->setMove(Game::gameBoard.getAvailableMoves(), playerIdx);
+        playersMatrix[playerIdx]->setMove(gameBoard.getAvailableMoves(), playerIdx);
 
-        move = Game::playersMatrix[playerIdx]->getMove();
+        move = playersMatrix[playerIdx]->getMove();
 
-        Game::makeAMove(move);
+        makeAMove(move);
 
         gameBoard.setAvailableMoves();
 
@@ -64,7 +64,7 @@ void Game::startGame(){
 
     if (win){
         for (int winnerIdx : winner){
-            std::cout << "The winner is " << Game::playersMatrix[winnerIdx]->getPlayerName() << " with color " << Game::playersMatrix[winnerIdx]->getColorName() << std::endl;
+            std::cout << "The winner is " << playersMatrix[winnerIdx]->getPlayerName() << " with color " << playersMatrix[winnerIdx]->getColorName() << std::endl;
         }
     } else {
         std::cout << "Nobody won. Try again!" << std::endl;
@@ -73,7 +73,7 @@ void Game::startGame(){
 
 
 void Game::makeAMove(Move move){
-    Game::gameBoard.changeBoard(move);
+    gameBoard.changeBoard(move);
 }
 
 void Game::checkWin(int playerIdx)
@@ -88,9 +88,9 @@ void Game::checkWin(int playerIdx)
 
         if (!black){
 
-            blackCount = count(gameBoardMatrix[i].begin(), gameBoardMatrix[i].end(), 'B');
+            blackCount = count(gameBoardMatrix[i].begin(), gameBoardMatrix[i].end(), Color::black);
             if (blackCount == 5){
-                if (gameBoardMatrix[i][0] != 'B' || gameBoardMatrix[i][gameBoardMatrix[i].size()-1] != 'B'){
+                if (gameBoardMatrix[i][0] != Color::black || gameBoardMatrix[i][gameBoardMatrix[i].size()-1] != Color::black){
                     win = true;
                     winner.push_back(0);
                     black = true;
@@ -105,12 +105,12 @@ void Game::checkWin(int playerIdx)
 
             blackCount = 0;
             for (int j=0; j<gameBoardMatrix[i].size(); j++){
-                if (gameBoard.getBoardMatrix()[j][i] == 'B'){
+                if (gameBoard.getBoardMatrix()[j][i] == Color::black){
                     blackCount++;
                 }
             }
             if (blackCount == 5){
-                if (gameBoardMatrix[0][i] != 'B' || gameBoardMatrix[gameBoardMatrix[i].size()-1][i] != 'B'){
+                if (gameBoardMatrix[0][i] != Color::black || gameBoardMatrix[gameBoardMatrix[i].size()-1][i] != Color::black){
                     win = true;
                     winner.push_back(0);
                     black = true;
@@ -126,9 +126,9 @@ void Game::checkWin(int playerIdx)
 
         if (!white){
 
-            whiteCount = count(gameBoardMatrix[i].begin(), gameBoardMatrix[i].end(), 'W');
+            whiteCount = count(gameBoardMatrix[i].begin(), gameBoardMatrix[i].end(), Color::white);
             if (whiteCount == 5){
-                if (gameBoardMatrix[i][0] != 'W' || gameBoardMatrix[i][gameBoardMatrix[i].size()-1] != 'W'){
+                if (gameBoardMatrix[i][0] != Color::white || gameBoardMatrix[i][gameBoardMatrix[i].size()-1] != Color::white){
                     win = true;
                     winner.push_back(1);
                     white = true;
@@ -144,12 +144,12 @@ void Game::checkWin(int playerIdx)
 
             whiteCount = 0;
             for (int j=0; j<gameBoardMatrix[i].size(); j++){
-                if (gameBoardMatrix[j][i] == 'W'){
+                if (gameBoardMatrix[j][i] == Color::white){
                     whiteCount++;
                 }
             }
             if (whiteCount == 5){
-                if (gameBoardMatrix[0][i] != 'W' || gameBoardMatrix[gameBoardMatrix[i].size()-1][i] != 'W'){
+                if (gameBoardMatrix[0][i] != Color::white || gameBoardMatrix[gameBoardMatrix[i].size()-1][i] != Color::white){
                     win = true;
                     winner.push_back(1);
                     white = true;
@@ -169,29 +169,29 @@ void Game::checkWin(int playerIdx)
 
     if (!black){
             if (
-                (gameBoardMatrix[0][1] == 'B' 
-                && gameBoardMatrix[1][2] == 'B' 
-                && gameBoardMatrix[2][3] == 'B' 
-                && gameBoardMatrix[3][4] == 'B' 
-                && gameBoardMatrix[4][5] == 'B')
+                (gameBoardMatrix[0][1] == Color::black 
+                && gameBoardMatrix[1][2] == Color::black 
+                && gameBoardMatrix[2][3] == Color::black 
+                && gameBoardMatrix[3][4] == Color::black 
+                && gameBoardMatrix[4][5] == Color::black)
                 ||
-                (gameBoardMatrix[1][0] == 'B'
-                && gameBoardMatrix[2][1] == 'B' 
-                && gameBoardMatrix[3][2] == 'B'
-                && gameBoardMatrix[4][3] == 'B'
-                && gameBoardMatrix[5][4] == 'B')
+                (gameBoardMatrix[1][0] == Color::black
+                && gameBoardMatrix[2][1] == Color::black 
+                && gameBoardMatrix[3][2] == Color::black
+                && gameBoardMatrix[4][3] == Color::black
+                && gameBoardMatrix[5][4] == Color::black)
                 ||
-                (gameBoardMatrix[4][0] == 'B' 
-                && gameBoardMatrix[3][1] == 'B' 
-                && gameBoardMatrix[2][2] == 'B' 
-                && gameBoardMatrix[1][3] == 'B' 
-                && gameBoardMatrix[0][4] == 'B')
+                (gameBoardMatrix[4][0] == Color::black 
+                && gameBoardMatrix[3][1] == Color::black 
+                && gameBoardMatrix[2][2] == Color::black 
+                && gameBoardMatrix[1][3] == Color::black 
+                && gameBoardMatrix[0][4] == Color::black)
                 ||
-                (gameBoardMatrix[5][1] == 'B'
-                && gameBoardMatrix[4][2] == 'B' 
-                && gameBoardMatrix[3][3] == 'B'
-                && gameBoardMatrix[2][4] == 'B'
-                && gameBoardMatrix[1][5] == 'B')
+                (gameBoardMatrix[5][1] == Color::black
+                && gameBoardMatrix[4][2] == Color::black 
+                && gameBoardMatrix[3][3] == Color::black
+                && gameBoardMatrix[2][4] == Color::black
+                && gameBoardMatrix[1][5] == Color::black)
             ) {
                 win = true;
                 winner.push_back(0);
@@ -200,29 +200,29 @@ void Game::checkWin(int playerIdx)
         } 
         if (!black){
             if (
-                (gameBoardMatrix[0][0] == 'B' 
-                && gameBoardMatrix[1][1] == 'B' 
-                && gameBoardMatrix[2][2] == 'B' 
-                && gameBoardMatrix[3][3] == 'B' 
-                && gameBoardMatrix[4][4] == 'B')
+                (gameBoardMatrix[0][0] == Color::black 
+                && gameBoardMatrix[1][1] == Color::black 
+                && gameBoardMatrix[2][2] == Color::black 
+                && gameBoardMatrix[3][3] == Color::black 
+                && gameBoardMatrix[4][4] == Color::black)
                 ||
-                (gameBoardMatrix[1][1] == 'B'
-                && gameBoardMatrix[2][2] == 'B' 
-                && gameBoardMatrix[3][3] == 'B'
-                && gameBoardMatrix[4][4] == 'B'
-                && gameBoardMatrix[5][5] == 'B')
+                (gameBoardMatrix[1][1] == Color::black
+                && gameBoardMatrix[2][2] == Color::black 
+                && gameBoardMatrix[3][3] == Color::black
+                && gameBoardMatrix[4][4] == Color::black
+                && gameBoardMatrix[5][5] == Color::black)
                 ||
-                (gameBoardMatrix[4][1] == 'B' 
-                && gameBoardMatrix[3][2] == 'B' 
-                && gameBoardMatrix[2][3] == 'B' 
-                && gameBoardMatrix[1][4] == 'B' 
-                && gameBoardMatrix[0][5] == 'B')
+                (gameBoardMatrix[4][1] == Color::black 
+                && gameBoardMatrix[3][2] == Color::black 
+                && gameBoardMatrix[2][3] == Color::black 
+                && gameBoardMatrix[1][4] == Color::black 
+                && gameBoardMatrix[0][5] == Color::black)
                 ||
-                (gameBoardMatrix[5][0] == 'B' 
-                && gameBoardMatrix[4][1] == 'B' 
-                && gameBoardMatrix[3][2] == 'B' 
-                && gameBoardMatrix[2][3] == 'B' 
-                && gameBoardMatrix[1][4] == 'B')
+                (gameBoardMatrix[5][0] == Color::black 
+                && gameBoardMatrix[4][1] == Color::black 
+                && gameBoardMatrix[3][2] == Color::black 
+                && gameBoardMatrix[2][3] == Color::black 
+                && gameBoardMatrix[1][4] == Color::black)
             ) {
                 win = true;
                 winner.push_back(0);
@@ -232,29 +232,29 @@ void Game::checkWin(int playerIdx)
 
         if (!white){
             if (
-                (gameBoardMatrix[0][1] == 'W'
-                && gameBoardMatrix[1][2] == 'W' 
-                && gameBoardMatrix[2][3] == 'W' 
-                && gameBoardMatrix[3][4] == 'W' 
-                && gameBoardMatrix[4][5] == 'W')
+                (gameBoardMatrix[0][1] == Color::white
+                && gameBoardMatrix[1][2] == Color::white 
+                && gameBoardMatrix[2][3] == Color::white 
+                && gameBoardMatrix[3][4] == Color::white 
+                && gameBoardMatrix[4][5] == Color::white)
                 ||
-                (gameBoardMatrix[1][0] ==  'W'
-                && gameBoardMatrix[2][1] == 'W'
-                && gameBoardMatrix[3][2] == 'W'
-                && gameBoardMatrix[4][3] == 'W' 
-                && gameBoardMatrix[5][4] == 'W')
+                (gameBoardMatrix[1][0] ==  Color::white
+                && gameBoardMatrix[2][1] == Color::white
+                && gameBoardMatrix[3][2] == Color::white
+                && gameBoardMatrix[4][3] == Color::white 
+                && gameBoardMatrix[5][4] == Color::white)
                 ||
-                (gameBoardMatrix[4][0] == 'W' 
-                && gameBoardMatrix[3][1] == 'W' 
-                && gameBoardMatrix[2][2] == 'W' 
-                && gameBoardMatrix[1][3] == 'W' 
-                && gameBoardMatrix[0][4] == 'W')
+                (gameBoardMatrix[4][0] == Color::white 
+                && gameBoardMatrix[3][1] == Color::white 
+                && gameBoardMatrix[2][2] == Color::white 
+                && gameBoardMatrix[1][3] == Color::white 
+                && gameBoardMatrix[0][4] == Color::white)
                 ||
-                (gameBoardMatrix[5][1] == 'W'
-                && gameBoardMatrix[4][2] == 'W'
-                && gameBoardMatrix[3][3] == 'W'
-                && gameBoardMatrix[2][4] == 'W'
-                && gameBoardMatrix[1][5] == 'W')
+                (gameBoardMatrix[5][1] == Color::white
+                && gameBoardMatrix[4][2] == Color::white
+                && gameBoardMatrix[3][3] == Color::white
+                && gameBoardMatrix[2][4] == Color::white
+                && gameBoardMatrix[1][5] == Color::white)
             ) {
                 win = true;
                 winner.push_back(1);
@@ -263,29 +263,29 @@ void Game::checkWin(int playerIdx)
         }
         if (!white){
             if (
-                (gameBoardMatrix[0][0] == 'W' 
-                && gameBoardMatrix[1][1] == 'W' 
-                && gameBoardMatrix[2][2] == 'W'
-                && gameBoardMatrix[3][3] == 'W' 
-                && gameBoardMatrix[4][4] == 'W')
+                (gameBoardMatrix[0][0] == Color::white 
+                && gameBoardMatrix[1][1] == Color::white 
+                && gameBoardMatrix[2][2] == Color::white
+                && gameBoardMatrix[3][3] == Color::white 
+                && gameBoardMatrix[4][4] == Color::white)
                 ||
-                (gameBoardMatrix[1][1] == 'W' 
-                && gameBoardMatrix[2][2] == 'W' 
-                && gameBoardMatrix[3][3] == 'W' 
-                && gameBoardMatrix[4][4] == 'W' 
-                && gameBoardMatrix[5][5] == 'W')
+                (gameBoardMatrix[1][1] == Color::white 
+                && gameBoardMatrix[2][2] == Color::white 
+                && gameBoardMatrix[3][3] == Color::white 
+                && gameBoardMatrix[4][4] == Color::white 
+                && gameBoardMatrix[5][5] == Color::white)
                 ||
-                (gameBoardMatrix[4][1] == 'W' 
-                && gameBoardMatrix[3][2] == 'W' 
-                && gameBoardMatrix[2][3] == 'W' 
-                && gameBoardMatrix[1][4] == 'W' 
-                && gameBoardMatrix[0][5] == 'W')
+                (gameBoardMatrix[4][1] == Color::white 
+                && gameBoardMatrix[3][2] == Color::white 
+                && gameBoardMatrix[2][3] == Color::white 
+                && gameBoardMatrix[1][4] == Color::white 
+                && gameBoardMatrix[0][5] == Color::white)
                 ||
-                (gameBoardMatrix[5][0] == 'W' 
-                && gameBoardMatrix[4][1] == 'W' 
-                && gameBoardMatrix[3][2] == 'W' 
-                && gameBoardMatrix[2][3] == 'W' 
-                && gameBoardMatrix[1][4] == 'W')
+                (gameBoardMatrix[5][0] == Color::white 
+                && gameBoardMatrix[4][1] == Color::white 
+                && gameBoardMatrix[3][2] == Color::white 
+                && gameBoardMatrix[2][3] == Color::white 
+                && gameBoardMatrix[1][4] == Color::white)
             ) {
                 win = true;
                 winner.push_back(1);

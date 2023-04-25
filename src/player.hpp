@@ -7,15 +7,15 @@
 struct Move {
     std::pair<int, int> placeOnBoard;
     int numberOfSquare;
-    int direction;
-    int color;
+    char direction;
+    char color;
 };
 
 class Player
 {
 private:
     std::string playerName;
-    std::string colorName;
+    char color;
 protected:
     Move move;
 
@@ -31,12 +31,12 @@ public:
         return this->playerName;
     }
 
-    std::string getColorName(){
-        return colorName;
+    char getColorName(){
+        return color;
     }
 
-    void setColorName(std::string colorName){
-        this->colorName = colorName;
+    void setColorName(char color){
+        this->color = color;
     }
 
     virtual void setMove(std::vector<std::pair<int, int>> & availableMoves, int playerIdx){
@@ -44,8 +44,6 @@ public:
     }
 
     Move getMove(){
-
-        // auto white = Color::white;
         return move;
     }
 

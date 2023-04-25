@@ -4,13 +4,21 @@ void RandomPlayer::setMove(std::vector<std::pair<int, int>> & availableMoves, in
 
     int randomPlace = rand() % availableMoves.size();
     int size = availableMoves.size();
-    RandomPlayer::move.placeOnBoard = availableMoves[randomPlace];
+    move.placeOnBoard = availableMoves[randomPlace];
 
     int randomDirection = rand() % 2;
-    RandomPlayer::move.direction = randomDirection;
+    if (randomDirection == 0){
+        move.direction = 'L';
+    } else {
+        move.direction = 'R';
+    }
 
     int randomSquare = rand() % 4;
-    RandomPlayer::move.numberOfSquare = randomSquare;
+    move.numberOfSquare = randomSquare;
 
-    RandomPlayer::move.color = playerIdx;
+    if (playerIdx == 0){
+        move.color = 'B';
+    } else {
+        move.color = 'W';
+    }
 }
